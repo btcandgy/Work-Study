@@ -53,8 +53,13 @@ public class MainActivity extends AppCompatActivity {
                         Intent data = result.getData();
                         // 处理返回的数据
                         String user = data.getStringExtra("user");
-                        String pwd = data.getStringExtra("pwd");
                         String email = data.getStringExtra("email");
+
+			usertext.setText(user);
+			emailtext.setText(email);
+
+	               ((EditText)findViewById(R.id.pwdtext)).setText(""); //清空“密码”编辑框
+		       ((EditText)findViewById(R.id.repwdtext)).setText(""); //清空“确认密码”编辑框
                     }
                 });
 

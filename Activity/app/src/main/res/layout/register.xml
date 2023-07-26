@@ -18,4 +18,9 @@
         android:layout_height="wrap_content"
         android:text="邮箱:"
         android:id="@+id/email"/>
+    <Button
+	android:layout_width="wrap_content"
+	android:layout_height="wrap_content"
+	android:text="返回上一步"
+	android:id="@+id/back"/>
 </LinearLayout>
