@@ -55,4 +55,24 @@ JNIEXPORT void JNICALL Java_HelloJNI_sayHello(JNIEnv *, jobject);
 
 二.动态注册实现方法
 JNI中有一种结构用来记录Java的Native方法和JNI方法的关联关系，它就是JNINativeMethod
-
+-------------------------------------------------------------
+创建：
+static const JNINativeMethod gMethods[] = {
+    {"setCamera",            "(Landroid/hardware/Camera;)V",    (void *)android_media_MediaRecorder_setCamera},
+    {"setVideoSource",       "(I)V",                            (void *)android_media_MediaRecorder_setVideoSource}
+}
+-------------------------------------------------------------
+上面定义了一个JNINativeMethod类型的gMethods数组，里面存储的就是MediaRecorder的Native方法与JNI层方法的对应关系，
+其中注释1处”setCamera”是Java层的Native方法，它对应的JNI层的方法为android_media_MediaRecorder_setCamera。
+”()V”是start方法的签名信息
+只定义JNINativeMethod 类型的数组是没有用的，还需要注册它，注册的方法为register_android_media_MediaRecorder
+注册:
+-------------------------------------------------------------
+int register_android_media_MediaRecorder(JNIEnv *env)
+{
+    return AndroidRuntime::registerNativeMethods(env,
+                "android/media/MediaRecorder", gMethods, NELEM(gMethods));
+}
+-------------------------------------------------------------
+先写到这
+2023-9-18
